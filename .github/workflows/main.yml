@@ -13,5 +13,11 @@ jobs:
         steps:
             - uses : actions/checkout@v3
 
-            - name : LoginToDockerHub
+            - name : "LoginToDockerHub"
               run: docker login --username ${{ secrets.DOKER_USERNAME }} --password ${{ secrets.DOCKER_TOKEN }}
+
+            - name : "build my image"
+              run: docker build -it ${{ secrets.DOKER_USERNAME }}/dockerproject .
+
+            - name : "push to dockerhub"
+              run: docker push ${{ secrets.DOKER_USERNAME }}/dockerproject
